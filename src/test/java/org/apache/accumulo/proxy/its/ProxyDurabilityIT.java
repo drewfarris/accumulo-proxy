@@ -56,7 +56,7 @@ import org.apache.accumulo.server.util.PortUtils;
 import org.apache.accumulo.test.functional.ConfigurableMacBase;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.RawLocalFileSystem;
-import org.apache.thrift.protocol.TJSONProtocol;
+import org.apache.thrift.protocol.TCompactProtocol;
 import org.apache.thrift.server.TServer;
 import org.junit.jupiter.api.Test;
 
@@ -102,7 +102,7 @@ public class ProxyDurabilityIT extends ConfigurableMacBase {
 
       proxyProps.put("sharedSecret", sharedSecret);
 
-      TJSONProtocol.Factory protocol = new TJSONProtocol.Factory();
+      TCompactProtocol.Factory protocol = new TCompactProtocol.Factory();
 
       int proxyPort = PortUtils.getRandomFreePort();
       final TServer proxyServer =
