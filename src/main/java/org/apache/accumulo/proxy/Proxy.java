@@ -35,13 +35,13 @@ import org.apache.accumulo.core.trace.TraceUtil;
 import org.apache.accumulo.core.util.HostAndPort;
 import org.apache.accumulo.core.util.threads.ThreadPools;
 import org.apache.accumulo.minicluster.MiniAccumuloCluster;
+import org.apache.accumulo.proxy.rpc.SaslServerConnectionParams;
+import org.apache.accumulo.proxy.rpc.ServerAddress;
+import org.apache.accumulo.proxy.rpc.ThriftServerType;
+import org.apache.accumulo.proxy.rpc.ThriftServerUtils;
+import org.apache.accumulo.proxy.rpc.TimedProcessor;
+import org.apache.accumulo.proxy.rpc.UGIAssumingProcessor;
 import org.apache.accumulo.proxy.thrift.AccumuloProxy;
-import org.apache.accumulo.server.rpc.SaslServerConnectionParams;
-import org.apache.accumulo.server.rpc.ServerAddress;
-import org.apache.accumulo.server.rpc.TServerUtils;
-import org.apache.accumulo.server.rpc.ThriftServerType;
-import org.apache.accumulo.server.rpc.TimedProcessor;
-import org.apache.accumulo.server.rpc.UGIAssumingProcessor;
 import org.apache.accumulo.start.spi.KeywordExecutable;
 import org.apache.commons.lang.StringUtils;
 import org.apache.hadoop.security.UserGroupInformation;
@@ -255,7 +255,7 @@ public class Proxy implements KeywordExecutable {
 
     // Create the thrift server with our processor and properties
 
-    return TServerUtils.startTServer(ClientConfConverter.toAccumuloConf(props), serverType,
+    return ThriftServerUtils.startTServer(ClientConfConverter.toAccumuloConf(props), serverType,
         timedProcessor, serverName, threadName, numThreads, ThreadPools.DEFAULT_TIMEOUT_MILLISECS,
         1000L, maxFrameSize, sslParams, saslParams, serverSocketTimeout, address);
   }
